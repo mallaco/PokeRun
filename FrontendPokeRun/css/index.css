@@ -1,0 +1,86 @@
+@font-face {
+    font-family: PKMNRBYGSC;
+    src:url("../font/PKMNRBYGSC.ttf")
+};
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: PKMNRBYGSC;
+}
+html{
+    
+    font-family: PKMNRBYGSC;
+    
+    background-color: darkgray;
+}
+
+.scenery{
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
+    background-image: url("../image/scenery.gif");
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.score{
+    position: absolute;
+    right: 15px;
+    top: 0;
+    color: white;
+}
+
+.clefairy{
+    position: absolute;
+    bottom: 40px;
+    right: -20px;
+}
+
+.clefairyAnimation{
+
+    animation: runClefairy 3s infinite linear;
+}
+
+@keyframes runClefairy{
+    from{
+        right: -20;
+    }
+    to {
+        right: 415px;
+    }
+}
+
+.ash {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+}
+
+.up{
+    animation: ashUp 1s infinite linear;
+}
+
+@keyframes ashUp{
+    from{
+        bottom: 40px;
+    }
+    to{
+        bottom: 60px;
+    }
+}
+
+.down{
+    animation: ashDown 1s infinite linear;
+}
+
+@keyframes ashDown{
+    from{
+        bottom: 60px;
+    }
+    to{
+        bottom: 40px;
+    }
+}

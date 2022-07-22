@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/index.css">
+
+    <title>PokeRun</title>
+</head>
+
+<body>
+
+    <div class="scenery">
+
+        <p id="score" class="score">0</p>
+        <img src="./image/Ash.gif" alt="ash" class="ash">
+        <img src="./image/Clefairy.gif" alt="clefairy" class="clefairy">
+    </div>
+
+    <button type="button" onclick="play()">play</button>
+    <button type="button" onclick="getRecord()">record</button>
+
+    <div id="record">
+        <table>
+            <thead>
+                <th>Nome</th>
+                <th>Score</th>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
