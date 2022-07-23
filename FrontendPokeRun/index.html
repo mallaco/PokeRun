@@ -12,7 +12,7 @@
 </head>
 
 <body>
-
+    <h1>PokeRun</h1>
     <div class="scenery">
 
         <p id="score" class="score">0</p>
@@ -20,8 +20,12 @@
         <img src="./image/Clefairy.gif" alt="clefairy" class="clefairy">
     </div>
 
-    <button type="button" onclick="play()">play</button>
-    <button type="button" onclick="getRecord()">record</button>
+    <div class="btn">
+        <textarea id="name" placeholder="Digite seu Nome"></textarea>
+        <button type="button" onclick="play()">play</button>
+        <button type="button" onclick="postRecord()">play</button>
+        <button type="button" onclick="getRecord()">record</button>
+    </div>
 
     <div id="record">
         <table>

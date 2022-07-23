@@ -12,6 +12,7 @@ class Record {
             }
             else{
                 console.log(result)
+                
             }
         })
     }

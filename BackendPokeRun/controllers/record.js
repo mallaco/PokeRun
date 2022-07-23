@@ -10,7 +10,7 @@ module.exports = app => {
     app.post('/record', cors(), (req, res) => {
 
         const records = req.body
-
+        console.log(req.body)
         Record.Adicionar(records)
 
         res.send("Você fez um post aeeeeee")

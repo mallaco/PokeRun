@@ -1,3 +1,4 @@
+const url = 'http://localhost:3000/record';
 const ash = document.querySelector('.ash');
 const clefairy = document.querySelector('.clefairy');
 var scorePoint = 0;
@@ -68,12 +69,21 @@ function Down() {
 }
 
 function play() {
-    stopGame = false;
-    ash.style.bottom = "40px";
-    clefairy.style.left = 'unset';
-    clefairy.classList.add("clefairyAnimation");
-    scorePoint = 0;
-    loop();
+
+    const name = document.getElementById('name').value;
+    if (name != "") {
+
+        document.getElementById("name").style.borderColor = "black";
+        stopGame = false;
+        ash.style.bottom = "40px";
+        clefairy.style.left = 'unset';
+        clefairy.classList.add("clefairyAnimation");
+        scorePoint = 0;
+        loop();
+    }
+    else {
+        document.getElementById("name").style.borderColor = "red";
+    }
 }
 
 function loop() {
@@ -104,16 +114,15 @@ const score = setInterval(() => {
     }
 }, 100);
 
-const url = 'http://localhost:3000/record';
 
 function getRecord() {
 
     fetch(url).then(function (res) {
         res.json().then(function (data) {
-            
+
             let tbody = document.getElementById('tbody');
-        
-            for(let i = 0; i < data.length; i++){
+
+            for (let i = 0; i < data.length; i++) {
 
                 let tr = tbody.insertRow();
                 let tdNome = tr.insertCell();
@@ -127,4 +136,24 @@ function getRecord() {
             console.error('Failed retrieving information', err);
         });
     })
+}
+
+function postRecord() {
+    const data = JSON.stringify({ Name: "Rogerio3", score: 45 });
+    console.log(data)
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Success:", data);
+        })
+        .catch((error) => {
+            console.log("Error:", error);
+        });
 }
