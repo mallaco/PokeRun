@@ -18,7 +18,7 @@ class Record {
     }
 
     Buscar(res){
-        const sql = 'select * from score';
+        const sql = 'select Name, score from score order by score DESC LIMIT 10;';
         
 
         connect.query(sql, (erro, result) => {

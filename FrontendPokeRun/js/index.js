@@ -3,7 +3,6 @@ const ash = document.querySelector('.ash');
 const clefairy = document.querySelector('.clefairy');
 var scorePoint = 0;
 var stopGame = true;
-var Records = [];
 
 
 document.addEventListener('keypress', function (event) {
@@ -93,13 +92,16 @@ function loop() {
         const ashPosition = +window.getComputedStyle(ash).bottom.replace('px', '');
 
         if (clefairyPosition <= 15 && ashPosition <= 54) {
+            const name = document.getElementById('name').value;
+            const score = document.getElementById('score').innerText;
+
             clefairy.classList.remove('clefairyAnimation');
             ash.classList.remove('up');
             ash.classList.remove('down');
             ash.style.bottom = `${ashPosition}px`;
             clefairy.style.left = '15px';
             stopGame = true;
-            Records.push(scorePoint);
+            postRecord(name, score);
             clearInterval(loopInterval);
         }
     }, 10);
@@ -138,18 +140,18 @@ function getRecord() {
     })
 }
 
-function postRecord() {
-    const data = JSON.stringify({ Name: "Rogerio3", score: 45 });
+function postRecord(nome,score) {
+    const data = JSON.stringify({ Name: nome, score: score });
     console.log(data)
 
     fetch(url, {
         method: "POST",
         headers: {
+            
             "Content-Type": "application/json",
         },
         body: data,
     })
-        .then((response) => response.json())
         .then((data) => {
             console.log("Success:", data);
         })

@@ -59,6 +59,15 @@ button{
     color: white;
 }
 
+.record{
+    width: 400px;
+    margin: 0 auto;
+}
+.record table{
+    width: 100%;
+    text-align: center;
+}
+
 .clefairy{
     position: absolute;
     bottom: 40px;
