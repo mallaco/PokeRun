@@ -4,6 +4,9 @@ const clefairy = document.querySelector('.clefairy');
 var scorePoint = 0;
 var stopGame = true;
 
+window.onload = function () {
+    getRecord();
+}
 
 document.addEventListener('keypress', function (event) {
 
@@ -78,6 +81,7 @@ function play() {
         clefairy.style.left = 'unset';
         clefairy.classList.add("clefairyAnimation");
         scorePoint = 0;
+        getRecord();
         loop();
     }
     else {
@@ -102,6 +106,7 @@ function loop() {
             clefairy.style.left = '15px';
             stopGame = true;
             postRecord(name, score);
+            //etRecord();
             clearInterval(loopInterval);
         }
     }, 10);
@@ -124,6 +129,10 @@ function getRecord() {
 
             let tbody = document.getElementById('tbody');
 
+            while (tbody.hasChildNodes()) {
+                tbody.removeChild(tbody.firstChild);
+            }
+
             for (let i = 0; i < data.length; i++) {
 
                 let tr = tbody.insertRow();
@@ -135,19 +144,19 @@ function getRecord() {
             }
 
         }).catch(function (err) {
-            console.error('Failed retrieving information', err);
+            console.error('Erro:', err);
         });
     })
 }
 
-function postRecord(nome,score) {
+function postRecord(nome, score) {
     const data = JSON.stringify({ Name: nome, score: score });
     console.log(data)
 
     fetch(url, {
         method: "POST",
         headers: {
-            
+
             "Content-Type": "application/json",
         },
         body: data,
