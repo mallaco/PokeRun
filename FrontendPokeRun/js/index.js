@@ -1,12 +1,14 @@
 const url = 'http://localhost:3000/record';
 const ash = document.querySelector('.ash');
-const clefairy = document.querySelector('.clefairy');
+const clefairy = new Image();
 var scorePoint = 0;
 var stopGame = true;
 
 window.onload = function () {
     getRecord();
+    
 }
+
 
 document.addEventListener('keypress', function (event) {
 
@@ -70,16 +72,21 @@ function Down() {
 
 }
 
+function createClefary(){
+    clefairy.src = '../image/Clefairy.gif';
+    clefairy.classList.add("clefairy");
+    clefairy.classList.add("clefairyAnimation");
+    document.querySelector('.scenery').appendChild(clefairy);
+}
+
 function play() {
 
     const name = document.getElementById('name').value;
     if (name != "") {
-
+        createClefary();
         document.getElementById("name").style.borderColor = "black";
         stopGame = false;
         ash.style.bottom = "40px";
-        clefairy.style.left = 'unset';
-        clefairy.classList.add("clefairyAnimation");
         scorePoint = 0;
         getRecord();
         loop();
@@ -89,24 +96,35 @@ function play() {
     }
 }
 
+
 function loop() {
     var loopInterval = setInterval(() => {
 
-        const clefairyPosition = clefairy.offsetLeft;
-        const ashPosition = +window.getComputedStyle(ash).bottom.replace('px', '');
+        var ashX = ash.offsetLeft;
+        var ashY = ash.offsetTop;
+        var ashW = ash.offsetWidth;
+        var ashH = ash.offsetHeight;
 
-        if (clefairyPosition <= 15 && ashPosition <= 54) {
+        var clefairyX = clefairy.offsetLeft;
+        var oclefairyY = clefairy.offsetTop;
+        var clefairyW = clefairy.offsetWidth;
+        var clefairyH = clefairy.offsetHeight;
+
+        //parte logica da colisão
+        colisao1 = (clefairyX + clefairyW >= ashX) && (ashX + ashW >= clefairyX);
+        colisao2 = (oclefairyY + clefairyH >= ashY) && (ashY + ashH >= oclefairyY);
+
+        if ((colisao1 && colisao2)) {
             const name = document.getElementById('name').value;
             const score = document.getElementById('score').innerText;
 
             clefairy.classList.remove('clefairyAnimation');
             ash.classList.remove('up');
             ash.classList.remove('down');
-            ash.style.bottom = `${ashPosition}px`;
+            ash.style.bottom = ashY;
             clefairy.style.left = '15px';
             stopGame = true;
             postRecord(name, score);
-            //etRecord();
             clearInterval(loopInterval);
         }
     }, 10);
