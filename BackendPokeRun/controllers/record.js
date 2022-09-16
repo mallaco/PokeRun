@@ -13,6 +13,6 @@ module.exports = app => {
         console.log(req.body)
         Record.Adicionar(records)
 
-        res.send("Você fez um post aeeeeee")
+        res.send("Record Enviado")
     })
 }
