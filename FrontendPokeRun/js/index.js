@@ -4,6 +4,7 @@ const clefairy = new Image();
 var scorePoint = 0;
 var stopGame = true;
 var level = 2.99;
+var teste = 1;
 
 window.onload = function () {
     getRecord();
@@ -73,28 +74,36 @@ function Down() {
 
 function createClefary() {
 
+    const positions = [40, 60];
+    const position = Math.floor(Math.random() * positions.length);
 
-        const positions = [40, 60];
-        const position = Math.floor(Math.random() * positions.length);
+    clefairy.remove();
+    clefairy.src = '../image/Clefairy.gif';
+    clefairy.classList.add("clefairy");
+    clefairy.style.bottom = positions[position] + 'px';
+    clefairy.classList.add("clefairyAnimation");
+    clefairy.style.right = '-20px';
+    clefairy.style.left = 'unset';
+    clefairy.style.animation = "runClefairy " + level + "s infinite linear";
 
-        clefairy.src = '../image/Clefairy.gif';
-        clefairy.classList.add("clefairy");
-        clefairy.style.bottom = positions[position] + 'px';
-        clefairy.classList.add("clefairyAnimation");
-        clefairy.style.animation = "runClefairy " + level + "s infinite linear";
-        document.querySelector('.scenery').appendChild(clefairy);
-        
-    
-    setInterval(() => {
-        if(stopGame == true){
-            clearInterval()
+    document.querySelector('.scenery').appendChild(clefairy);
+
+
+}
+
+function intervalClefary() {
+
+    var timer = setInterval(() => {
+        if (stopGame == true) {
+            clearInterval(timer)
         }
-        else{
+        else {
             createClefary();
+            teste = teste + 1;
+            console.log(teste);
             level = level - 0.01;
         }
     }, 3000);
-
 }
 
 function play() {
@@ -107,6 +116,7 @@ function play() {
         ash.style.bottom = "40px";
         scorePoint = 0;
         getRecord();
+        intervalClefary();
         loop();
     }
     else {
