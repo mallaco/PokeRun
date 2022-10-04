@@ -3,8 +3,8 @@ const ash = document.querySelector('.ash');
 const clefairy = new Image();
 var scorePoint = 0;
 var stopGame = true;
-var level = 2.99;
-var teste = 1;
+var level = 3.00;
+var levelTimer = 3000;
 
 window.onload = function () {
     getRecord();
@@ -84,7 +84,7 @@ function createClefary() {
     clefairy.classList.add("clefairyAnimation");
     clefairy.style.right = '-20px';
     clefairy.style.left = 'unset';
-    clefairy.style.animation = "runClefairy " + level + "s infinite linear";
+    clefairy.style.animation = "runClefairy " + level + "s normal linear";
 
     document.querySelector('.scenery').appendChild(clefairy);
 
@@ -98,12 +98,15 @@ function intervalClefary() {
             clearInterval(timer)
         }
         else {
+            levelTimer = levelTimer - 50;
+            level = levelTimer / 1000;
+            console.log(level);
+            //levelTimer = parseFloat(levelTimer - 45).toFixed(0);
+            console.log(levelTimer);
             createClefary();
-            teste = teste + 1;
-            console.log(teste);
-            level = level - 0.01;
+
         }
-    }, 3000);
+    }, levelTimer);
 }
 
 function play() {

@@ -76,7 +76,7 @@ button{
 
 .clefairyAnimation{
 
-    animation: runClefairy 3s infinite linear;
+    animation: runClefairy 3s normal;
 }
 
 @keyframes runClefairy{
